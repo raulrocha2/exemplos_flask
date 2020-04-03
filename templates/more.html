@@ -1,14 +1,12 @@
- <!DOCTYPE html>
+{% extends "layout.html" %}
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title> My Second Page Flask with HTML !!</title>
-</head>
-<body>
+{% block heading %}
+  Second Page
+  {% endblock %}
 	
-		<h1>Second Page </h1>
-	
+{% block body%}
+
+
 <p>
 	<h3>History</h3>
 Flask was created by Armin Ronacher of Pocoo, an international group of Python enthusiasts formed in 2004.[7] According to Ronacher, the idea was originally an April Fool's joke that was popular enough to make into a serious application.
@@ -20,5 +18,4 @@ Flask has become popular among Python enthusiasts. As of January 2020, it has mo
 
 <a href="{{ url_for('index')}}">Go Back</a>
 
-</body>
-</html> 
+{% endblock %} 

@@ -18,12 +18,17 @@ def more():
 def getname():
 	return render_template("get_name.html")
 
-@app.route("/myname", methods=["POST"])
+@app.route("/myname", methods=["POST", "GET"])
 def myname():
     
     name = request.form.get('name')
     return render_template("my_name.html", name=name)	
 
+@app.route("/listname")
+def listname():
+	list_name = ["raul", "lucas", "joao", "nadia"]
+
+	return render_template("list_name.html", list_name=list_name )
 
 
 

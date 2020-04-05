@@ -1,8 +1,14 @@
 from flask import Flask, render_template, request
-
+from flask_session import Session
 
 
 app = Flask(__name__)
+
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "null"
+Session(app)
+
+list_name = []
 
 @app.route("/")
 def index():
@@ -18,15 +24,12 @@ def more():
 def getname():
 	return render_template("get_name.html")
 
-@app.route("/myname", methods=["POST", "GET"])
-def myname():
-    
-    name = request.form.get('name')
-    return render_template("my_name.html", name=name)	
 
-@app.route("/listname")
+
+@app.route("/listname", methods=["POST", "GET"])
 def listname():
-	list_name = ["raul", "lucas", "joao", "nadia"]
+	names = request.form.get("names")
+	list_name.append(names) 
 
 	return render_template("list_name.html", list_name=list_name )
 

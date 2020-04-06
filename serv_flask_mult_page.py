@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request
-from flask_session import Session
+from flask import Flask, render_template, request, session
+from flask_session import Session 
 
 
 app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "null"
+app.config["SESSION_TYPE"] = "FileSystem"
 Session(app)
 
 list_name = []
@@ -26,12 +26,15 @@ def getname():
 
 
 
-@app.route("/listname", methods=["POST", "GET"])
+@app.route("/listname", methods=["GET", "POST"])
 def listname():
-	names = request.form.get("names")
-	list_name.append(names) 
+	if Session.get("list_name") is None:
+		Session["list_name"] = []
+	if request.method == "POST":
+		get_name = request.form.get("get_name")
+		Session["list_name"].append(get_name) 
 
-	return render_template("list_name.html", list_name=list_name )
+	return render_template("list_name.html", list_name=Session["list_name"] )
 
 
 

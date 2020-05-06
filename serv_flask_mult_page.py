@@ -26,7 +26,7 @@ def getname():
 
 
 
-@app.route("/listname", methods=["GET", "POST"])
+@app.route("/listname", methods=["POST", "GET"])
 def listname():
 	if Session.get("list_name") is None:
 		Session["list_name"] = []
